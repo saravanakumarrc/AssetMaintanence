@@ -20,6 +20,7 @@ namespace Application.UseCases
         {
             if (unit == null) throw new InvalidArgumentForUseCase();
             // validation logic -- TODO: using fluent validation
+
             return _repository.Add(unit);
         }
     }

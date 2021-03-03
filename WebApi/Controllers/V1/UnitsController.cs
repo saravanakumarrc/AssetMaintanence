@@ -10,20 +10,19 @@ using WebApi.Dto.V1;
 
 namespace WebApi.Controllers.V1
 {
-    [Route("api/v1/[controller]")]
     [ApiVersion("1.0")]
+    [Route("api/units")]
     [ApiController]
-    public class UnitsController : ControllerBase
+    public class UnitsV1Controller : ControllerBase
     {
         private readonly IUnitsManager _unitsManager;
 
-        public UnitsController(IUnitsManager unitsManager)
+        public UnitsV1Controller(IUnitsManager unitsManager)
         {
             _unitsManager = unitsManager;
         }
 
         [HttpPost]
-        [MapToApiVersion("1.0")]
         public async Task<ActionResult> Post([FromBody] UnitRequest unitRequest)
         {
             var entity = new Unit { CreatedBy = "saravana", UnitNumber = unitRequest.UnitNumber, UnitType = unitRequest.UnitType };

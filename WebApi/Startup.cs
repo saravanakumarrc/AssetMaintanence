@@ -1,9 +1,11 @@
 using Application;
+using FluentValidation.AspNetCore;
 using Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -30,12 +32,13 @@ namespace WebApi
         {
             services.AddInfrastructure(Configuration);
             services.AddApplication();
-            services.AddControllers();
+            services.AddControllers().AddFluentValidation();
             services.AddApiVersioning(c =>
             {
                 c.DefaultApiVersion = new ApiVersion(1, 0);
                 c.AssumeDefaultVersionWhenUnspecified = true;
-                c.ReportApiVersions = true;
+                c.ReportApiVersions = true; 
+                c.ApiVersionReader = new HeaderApiVersionReader("api-version");
             });
 
             services.AddSwaggerGen(c =>
