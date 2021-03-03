@@ -1,3 +1,4 @@
+using Application;
 using Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -28,7 +29,15 @@ namespace WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddInfrastructure(Configuration);
+            services.AddApplication();
             services.AddControllers();
+            services.AddApiVersioning(c =>
+            {
+                c.DefaultApiVersion = new ApiVersion(1, 0);
+                c.AssumeDefaultVersionWhenUnspecified = true;
+                c.ReportApiVersions = true;
+            });
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebApi", Version = "v1" });

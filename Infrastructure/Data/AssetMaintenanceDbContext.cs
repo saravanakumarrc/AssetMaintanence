@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Infrastructure.Data
 {
-    public class AssetMaintenanceDbContext : DbContext
+    public class AssetMaintenanceDbContext : DbContext, IAssetMaintenanceDbContext
     {
         public DbSet<Unit> Units { get; set; }
 
