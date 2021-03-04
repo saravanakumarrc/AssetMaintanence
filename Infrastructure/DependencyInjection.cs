@@ -1,4 +1,6 @@
-﻿using Infrastructure.Data;
+﻿using Application;
+using Infrastructure.Data;
+using Infrastructure.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,6 +18,10 @@ namespace Infrastructure
                     options.UseSqlServer(
                         Configuration.GetConnectionString("DefaultConnection"),
                         b => b.MigrationsAssembly(typeof(AssetMaintenanceDbContext).Assembly.FullName)));
+
+            services.AddScoped<AssetMaintenanceDbContext>();
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            //services.AddScoped(IRepository<Domain.Entities.EntityBase>, Repository<Domain.Entities.EntityBase>);
         }
     }
 }

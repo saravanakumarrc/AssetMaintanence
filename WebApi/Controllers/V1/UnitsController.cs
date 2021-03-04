@@ -10,7 +10,7 @@ using WebApi.Dto.V1;
 
 namespace WebApi.Controllers.V1
 {
-    [Route("api/v1/[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class UnitsController : ControllerBase
     {
@@ -21,6 +21,7 @@ namespace WebApi.Controllers.V1
             _unitsManager = unitsManager;
         }
 
+        [HttpPost]
         public async Task<ActionResult> Post([FromBody] UnitRequest unitRequest)
         {
             var entity = new Unit { CreatedBy = "saravana", UnitNumber = unitRequest.UnitNumber, UnitType = unitRequest.UnitType };
